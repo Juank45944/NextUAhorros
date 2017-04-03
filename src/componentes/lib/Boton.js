@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-const Boton = ({ texto, onPress }) => {
-    const { contenedorStyle, textoStyle } = styles;
+const Boton = ({ onPress, children }) => {
+    const { contenedorStyle } = styles;
     return (
         <TouchableOpacity style={contenedorStyle} onPress={onPress}>
-            <Text style={textoStyle}>{texto}</Text>
+            {children}
         </TouchableOpacity>
     );
 };
@@ -17,17 +17,12 @@ const styles = {
         backgroundColor: '#f1f1f1',
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#acacac',
+        borderColor: '#08BDBD',
         marginLeft: 5,
         marginRight: 5,
-        padding: 5
-    },
-    textoStyle: {
-        alignSelf: 'center',
-        color: '#0022d1',
-        fontSize: 16,
-        fontWeight: '400'
-
+        padding: 5,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 };
 
