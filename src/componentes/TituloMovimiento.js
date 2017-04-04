@@ -30,7 +30,7 @@ class TituloMovimiento extends Component {
             </View>
         );
     }
-};
+}
 
 const styles = {
     subtituloStyle: {

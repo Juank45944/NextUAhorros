@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Periodicos from './componentes/Periodicos';
+import Acciones from './componentes/Acciones';
 
 class App extends Component {
     render() {
         return (
-            <Periodicos />
+            <Acciones />
         );
     }
 }
