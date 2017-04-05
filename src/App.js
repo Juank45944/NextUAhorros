@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Acciones from './componentes/Acciones';
+import Registro from './componentes/Registro';
 
 class App extends Component {
     render() {
         return (
-            <Acciones />
+            <Registro />
         );
     }
 }
