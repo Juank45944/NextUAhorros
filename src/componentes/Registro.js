@@ -1,9 +1,40 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { Input, Card, CardSection, Boton, Encabezado } from './lib';
+import firebase from 'firebase';
+import { Input, Card, CardSection, Boton, Encabezado, Spinner } from './lib';
 
 class Login extends Component {
-    state = { email: '', password: '', passwordRepeat: '', error: '' };
+    state = { email: '', password: '', passwordRepeat: '', error: '', cargando: false };
+
+    enviarFormulario() {
+        this.setState({ cargando: true });
+        const { email, password, passwordRepeat } = this.state;
+        if (password === passwordRepeat) {
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(this.registroExitoso.bind(this))
+                .catch(this.registroFallido.bind(this));
+        } else this.setState({ error: 'Las contraseñas no coinciden ', cargando: false });
+    }
+    registroFallido() {
+        this.setState({ error: 'Ha ocurrido un error en el registro', cargando: false });
+    }
+    registroExitoso() {
+        this.setState({ cargando: false });
+        console.log('registered');
+    }
+
+    mostrarBoton() {
+        if (this.state.cargando) {
+            return <Spinner />;
+        }
+        return (
+            <Boton onPress={this.enviarFormulario.bind(this)}>
+                <Text>Enviar</Text>
+            </Boton>
+        );
+    }
+
+
     render() {
         return (
             <View>
@@ -41,9 +72,7 @@ class Login extends Component {
                     <Text style={styles.errorMsgStyle}>{this.state.error}</Text>
 
                     <CardSection>
-                        <Boton>
-                            <Text>Enviar</Text>
-                        </Boton>
+                        {this.mostrarBoton()}
                     </CardSection>
                 </Card>
             </View>

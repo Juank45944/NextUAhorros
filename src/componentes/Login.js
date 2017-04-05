@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { Input, Card, CardSection, Boton, Encabezado } from './lib';
+import firebase from 'firebase';
+import { Input, Card, CardSection, Boton, Encabezado, Spinner } from './lib';
 
 class Login extends Component {
-    state = { email: '', password: '', error: '' };
+    state = { email: '', password: '', error: '', cargando: false };
+
+    enviarFormulario() {
+        const { email, password } = this.state;
+        this.setState({ cargando: true });
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.loginExitoso.bind(this))
+            .catch(this.loginError.bind(this));
+    }
+    loginError() {
+        this.setState({ error: 'Error de autenticación', cargando: false });
+    }
+    loginExitoso() {
+        this.setState({ cargando: false });
+        console.log('logged in');
+    }
+    mostrarBoton() {
+        if (this.state.cargando) {
+            return <Spinner />;
+        }
+        return (
+            <Boton onPress={this.enviarFormulario.bind(this)}>
+                <Text>Iniciar Sesión</Text>
+            </Boton>
+        );
+    }
+
     render() {
         return (
             <View>
@@ -31,9 +58,7 @@ class Login extends Component {
                     <Text style={styles.errorMsgStyle}>{this.state.error}</Text>
 
                     <CardSection>
-                        <Boton>
-                            <Text>Iniciar Sesión</Text>
-                        </Boton>
+                        {this.mostrarBoton()}
                     </CardSection>
                 </Card>
             </View>
