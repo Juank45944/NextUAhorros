@@ -1,51 +1,65 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import { Encabezado, BarraInferior } from './lib';
 import Movimiento from './Movimiento';
 import TituloMovimiento from './TituloMovimiento';
 
 class Periodicos extends Component {
+    componentWillMount() {
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        });
+        this.dataSource = ds.cloneWithRows(this.props.periodicos);
+    }
+    mostrarIngreso(movimiento) {
+        if (movimiento.esIngreso) {
+            return (
+                <Movimiento
+                    titulo={movimiento.titulo}
+                    fechaPago={movimiento.fechaPago}
+                    monto={movimiento.monto}
+                    isIngreso
+                />);
+        }
+        return <View />;
+    }
+    mostrarEgreso(movimiento) {
+        if (!movimiento.esIngreso) {
+            return (
+                <Movimiento
+                    titulo={movimiento.titulo}
+                    fechaPago={movimiento.fechaPago}
+                    monto={movimiento.monto}
+                    isIngreso={false}
+                />);
+        }
+        return <View />;
+    }
     render() {
-        console.log(this.props);
         const { mainContenedor } = styles;
         return (
             <View>
                 <Encabezado tituloEncabezado="Movimientos Periódicos" />
                 <ScrollView style={mainContenedor}>
                     <TituloMovimiento texto="Ingresos" isIngreso />
-                    <Movimiento
-                        titulo="Salario" 
-                        fechaPago="1 y 15 de cada mes" 
-                        monto="$1000" 
-                        isIngreso
+                    <ListView
+                        dataSource={this.dataSource}
+                        renderRow={this.mostrarIngreso}
                     />
-                    <Movimiento
-                        titulo="Trabajo extra" 
-                        fechaPago="30 de cada mes" 
-                        monto="$200" 
-                        isIngreso
-                    />
+
                     <TituloMovimiento texto="Egresos" isIngreso={false} />
-                    <Movimiento
-                        titulo="Renta" 
-                        fechaPago="30 de cada mes" 
-                        monto="$500" 
-                        isIngreso={false}
+                    <ListView
+                        dataSource={this.dataSource}
+                        renderRow={this.mostrarEgreso}
                     />
-                    <Movimiento
-                        titulo="Servicios" 
-                        fechaPago="12 de cada mes" 
-                        monto="$100" 
-                        isIngreso={false}
-                    />
-                    
+
                 </ScrollView>
-                <BarraInferior 
-                    primero="ios-home" 
-                    segundo="ios-refresh" 
-                    tercero="ios-list" 
-                    cuarto="ios-person" 
+                <BarraInferior
+                    primero="ios-home"
+                    segundo="ios-refresh"
+                    tercero="ios-list"
+                    cuarto="ios-person"
                 />
             </View>
         );
