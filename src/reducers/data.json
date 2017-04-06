@@ -1,0 +1,26 @@
+[ {
+  "esIngreso" : true,
+  "fechaPago" : "23 de cada mes",
+  "monto" : 300,
+  "titulo" : "Bonificación"
+}, {
+  "esIngreso" : true,
+  "fechaPago" : "1 y 15 de cada mes",
+  "monto" : 1000,
+  "titulo" : "Salario"
+}, {
+  "esIngreso" : true,
+  "fechaPago" : "30 de cada mes",
+  "monto" : 200,
+  "titulo" : "Trabajo extra"
+}, {
+  "esIngreso" : false,
+  "fechaPago" : "30 de cada mes",
+  "monto" : 500,
+  "titulo" : "Renta"
+}, {
+  "esIngreso" : false,
+  "fechaPago" : "12 de cada mes",
+  "monto" : 100,
+  "titulo" : "Servicios"
+} ]

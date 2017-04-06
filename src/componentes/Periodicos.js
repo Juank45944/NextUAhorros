@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import { Encabezado, BarraInferior } from './lib';
 import Movimiento from './Movimiento';
 import TituloMovimiento from './TituloMovimiento';
 
 class Periodicos extends Component {
     render() {
+        console.log(this.props);
         const { mainContenedor } = styles;
         return (
             <View>
@@ -59,4 +61,6 @@ const styles = {
     }
 };
 
-export default Periodicos;
+const mapStateToProps = state => ({ periodicos: state.periodicos });
+
+export default connect(mapStateToProps)(Periodicos);

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import Login from './componentes/Login';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './reducers';
+import Periodicos from './componentes/Periodicos';
 
 class App extends Component {
     componentWillMount() {
@@ -15,7 +18,9 @@ class App extends Component {
     }
     render() {
         return (
-            <Login />
+            <Provider store={createStore(reducers)}>
+                <Periodicos />
+            </Provider>
         );
     }
 }
