@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import firebase from 'firebase';
-import { Input, Card, CardSection, Boton, Encabezado, Spinner } from './lib';
+import { Input, Card, CardSection, Boton, Spinner } from './lib';
 
 class Login extends Component {
     state = { email: '', password: '', error: '', cargando: false };
@@ -34,7 +34,6 @@ class Login extends Component {
     render() {
         return (
             <View>
-                <Encabezado tituloEncabezado="Bienvenido" />
                 <Card addStyle={styles.cardStyle}>
                     <CardSection>
                         <Input

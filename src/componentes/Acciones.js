@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import request from 'superagent';
-import { Encabezado, BarraInferior, Card } from './lib';
+import { BarraInferior, Card } from './lib';
 import ItemListaAccion from './ItemListaAccion';
 
 class Acciones extends Component {
@@ -26,7 +26,6 @@ class Acciones extends Component {
     render() {
         return (
             <View>
-                <Encabezado tituloEncabezado="Acciones" />
                 <Card addStyle={styles.cardStyles}>
                     <View style={styles.headerStyle}>
                         <Text style={styles.headerNameStyle}>Nombre</Text>

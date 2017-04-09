@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, ListView } from 'react-native';
 import { connect } from 'react-redux';
-import { Encabezado, BarraInferior } from './lib';
+import { BarraInferior } from './lib';
 import Movimiento from './Movimiento';
 import TituloMovimiento from './TituloMovimiento';
 
@@ -40,7 +40,6 @@ class Periodicos extends Component {
         const { mainContenedor } = styles;
         return (
             <View>
-                <Encabezado tituloEncabezado="Movimientos Periódicos" />
                 <ScrollView style={mainContenedor}>
                     <TituloMovimiento texto="Ingresos" isIngreso />
                     <ListView
